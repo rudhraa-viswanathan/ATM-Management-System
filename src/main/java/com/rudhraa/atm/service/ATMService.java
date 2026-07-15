@@ -1,9 +1,13 @@
 package com.rudhraa.atm.service;
 import com.rudhraa.atm.model.Account;
 import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
 public class ATMService {
 
     private final Scanner scanner = new Scanner(System.in);
+    private final List<String> transactions = new ArrayList<>();
+
     public void start() {
 
         Account account = new Account("1234567890","Rudhraa",1234,50000);
@@ -20,6 +24,7 @@ public class ATMService {
 
             System.out.println("\nLogin Successful!");
             System.out.println("Welcome " + account.getAccountHolderName());
+            transactions.add("Login Successful");
             showMenu(account);
         } else {
 
@@ -55,6 +60,12 @@ public class ATMService {
             case 4:
                 changePin(account);
                 break;
+            case 5:
+                transactionHistory();
+                break;
+            case 6:
+                System.out.println("Thank you for using our ATM.");
+                break;
 
             default:
                 System.out.println("Feature coming soon...");
@@ -63,7 +74,7 @@ public class ATMService {
     }
 
     public void balanceEnquiry(Account account) {
-
+        transactions.add("Balance Enquiry");
         System.out.println("\n==================================");
         System.out.println("      BALANCE ENQUIRY");
         System.out.println("==================================");
@@ -89,6 +100,7 @@ public class ATMService {
         double currentBalance = account.getBalance();
         currentBalance += amount;
         account.setBalance(currentBalance);
+        transactions.add("Deposited ₹" + amount);
         System.out.println("\n₹" + amount + " deposited successfully!");
         System.out.println("Updated Balance : ₹" + account.getBalance());
     }
@@ -113,6 +125,7 @@ public class ATMService {
         currentBalance -= amount;
 
         account.setBalance(currentBalance);
+        transactions.add("Withdrawn ₹" + amount);
         System.out.println("\n₹" + amount + " withdrawn successfully!");
         System.out.println("Remaining Balance : ₹" + account.getBalance());
 
@@ -138,8 +151,24 @@ public class ATMService {
             return;
         }
         account.setPin(newPin);
-
+        transactions.add("PIN Changed Successfully");
         System.out.println("\nPIN changed successfully.");
 
+    }
+
+    public void transactionHistory() {
+
+        System.out.println("\n==================================");
+        System.out.println("      TRANSACTION HISTORY");
+        System.out.println("==================================");
+
+        if (transactions.isEmpty()) {
+            System.out.println("No transactions available.");
+            return;
+        }
+
+        for (String transaction : transactions) {
+            System.out.println(transaction);
+        }
     }
 }
