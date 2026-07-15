@@ -46,6 +46,9 @@ public class ATMService {
             case 1:
                 balanceEnquiry(account);
                 break;
+            case 2:
+                deposit(account);
+                break;
 
             default:
                 System.out.println("Feature coming soon...");
@@ -62,5 +65,25 @@ public class ATMService {
         System.out.println("Account Number : " + account.getAccountNumber());
         System.out.println("Available Balance : ₹" + account.getBalance());
 
+    }
+
+    public void deposit(Account account) {
+        System.out.println("\n==================================");
+        System.out.println("           CASH DEPOSIT");
+        System.out.println("==================================");
+
+        System.out.print("Enter Deposit Amount: ₹");
+        double amount = scanner.nextDouble();
+
+        if (amount <= 0) {
+            System.out.println("Invalid deposit amount.");
+            return;
+        }
+
+        double currentBalance = account.getBalance();
+        currentBalance += amount;
+        account.setBalance(currentBalance);
+        System.out.println("\n₹" + amount + " deposited successfully!");
+        System.out.println("Updated Balance : ₹" + account.getBalance());
     }
 }
