@@ -14,11 +14,7 @@ public class ATMApplication {
 
 
                 Account account = new Account(
-                        "1234567890",
-                        "Rudhraa",
-                        1234,
-                        50000
-                );
+                        "1234567890","Rudhraa",1234,50000);
 
                 System.out.println(account);
             }
