@@ -1,6 +1,5 @@
 package com.rudhraa.atm;
-
-import com.rudhraa.atm.model.Account;
+import com.rudhraa.atm.service.ATMService;
 
 public class ATMApplication {
 
@@ -11,12 +10,9 @@ public class ATMApplication {
         System.out.println("==================================");
         System.out.println("Application Started...");
 
+        ATMService atmService = new ATMService();
+        atmService.start();
 
-
-                Account account = new Account(
-                        "1234567890","Rudhraa",1234,50000);
-
-                System.out.println(account);
             }
 
 }
