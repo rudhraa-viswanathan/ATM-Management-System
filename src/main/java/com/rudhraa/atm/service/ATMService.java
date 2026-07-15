@@ -49,6 +49,9 @@ public class ATMService {
             case 2:
                 deposit(account);
                 break;
+            case 3:
+                withdraw(account);
+                break;
 
             default:
                 System.out.println("Feature coming soon...");
@@ -85,5 +88,30 @@ public class ATMService {
         account.setBalance(currentBalance);
         System.out.println("\n₹" + amount + " deposited successfully!");
         System.out.println("Updated Balance : ₹" + account.getBalance());
+    }
+
+    public void withdraw(Account account) {
+        System.out.println("\n==================================");
+        System.out.println("        CASH WITHDRAWAL");
+        System.out.println("==================================");
+        System.out.print("Enter Withdrawal Amount: ₹");
+        double amount = scanner.nextDouble();
+        if (amount <= 0) {
+            System.out.println("Invalid withdrawal amount.");
+            return;
+        }
+        if (amount > account.getBalance()) {
+            System.out.println("Insufficient balance.");
+            System.out.println("Available Balance : ₹" + account.getBalance());
+            return;
+        }
+        double currentBalance = account.getBalance();
+
+        currentBalance -= amount;
+
+        account.setBalance(currentBalance);
+        System.out.println("\n₹" + amount + " withdrawn successfully!");
+        System.out.println("Remaining Balance : ₹" + account.getBalance());
+
     }
 }
