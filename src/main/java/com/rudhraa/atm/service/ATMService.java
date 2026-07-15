@@ -34,14 +34,19 @@ public class ATMService {
     }
 
     public void showMenu(Account account) {
+        boolean running = true;
+
+        while (running) {
+
         System.out.println("\n==================================");
         System.out.println("            ATM MENU");
         System.out.println("==================================");
-        System.out.println("1. Balance Enquiry");
-        System.out.println("2. Deposit");
-        System.out.println("3. Withdraw");
-        System.out.println("4. Change PIN");
-        System.out.println("5. Exit");
+            System.out.println("1. Balance Enquiry");
+            System.out.println("2. Deposit");
+            System.out.println("3. Withdraw");
+            System.out.println("4. Change PIN");
+            System.out.println("5. Transaction History");
+            System.out.println("6. Exit");
 
         System.out.print("\nEnter your choice: ");
         int choice = scanner.nextInt();
@@ -65,11 +70,12 @@ public class ATMService {
                 break;
             case 6:
                 System.out.println("Thank you for using our ATM.");
+                running = false;
                 break;
 
             default:
-                System.out.println("Feature coming soon...");
-
+                System.out.println("Invalid choice. Please select between 1 and 6.");
+        }
         }
     }
 
@@ -144,6 +150,10 @@ public class ATMService {
         }
         System.out.print("Enter New PIN: ");
         int newPin = scanner.nextInt();
+        if (newPin < 1000 || newPin > 9999) {
+            System.out.println("PIN must be exactly 4 digits.");
+            return;
+        }
         System.out.print("Confirm New PIN: ");
         int confirmPin = scanner.nextInt();
         if (newPin != confirmPin) {
