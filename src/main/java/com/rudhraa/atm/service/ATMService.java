@@ -52,6 +52,9 @@ public class ATMService {
             case 3:
                 withdraw(account);
                 break;
+            case 4:
+                changePin(account);
+                break;
 
             default:
                 System.out.println("Feature coming soon...");
@@ -112,6 +115,31 @@ public class ATMService {
         account.setBalance(currentBalance);
         System.out.println("\n₹" + amount + " withdrawn successfully!");
         System.out.println("Remaining Balance : ₹" + account.getBalance());
+
+    }
+
+    public void changePin(Account account) {
+        System.out.println("\n==================================");
+        System.out.println("          CHANGE PIN");
+        System.out.println("==================================");
+        System.out.print("Enter Current PIN: ");
+        int currentPin = scanner.nextInt();
+
+        if (currentPin != account.getPin()) {
+            System.out.println("Incorrect current PIN.");
+            return;
+        }
+        System.out.print("Enter New PIN: ");
+        int newPin = scanner.nextInt();
+        System.out.print("Confirm New PIN: ");
+        int confirmPin = scanner.nextInt();
+        if (newPin != confirmPin) {
+            System.out.println("PIN confirmation does not match.");
+            return;
+        }
+        account.setPin(newPin);
+
+        System.out.println("\nPIN changed successfully.");
 
     }
 }
