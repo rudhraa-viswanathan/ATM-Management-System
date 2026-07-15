@@ -37,16 +37,7 @@ public class ATMService {
         boolean running = true;
 
         while (running) {
-
-        System.out.println("\n==================================");
-        System.out.println("            ATM MENU");
-        System.out.println("==================================");
-            System.out.println("1. Balance Enquiry");
-            System.out.println("2. Deposit");
-            System.out.println("3. Withdraw");
-            System.out.println("4. Change PIN");
-            System.out.println("5. Transaction History");
-            System.out.println("6. Exit");
+        displayMenu();
 
         System.out.print("\nEnter your choice: ");
         int choice = scanner.nextInt();
@@ -69,7 +60,7 @@ public class ATMService {
                 transactionHistory();
                 break;
             case 6:
-                System.out.println("Thank you for using our ATM.");
+                exitMessage();
                 running = false;
                 break;
 
@@ -79,11 +70,31 @@ public class ATMService {
         }
     }
 
+    private void displayMenu() {
+
+        System.out.println("\n==================================");
+        System.out.println("            ATM MENU");
+        System.out.println("==================================");
+        System.out.println("1. Balance Enquiry");
+        System.out.println("2. Deposit");
+        System.out.println("3. Withdraw");
+        System.out.println("4. Change PIN");
+        System.out.println("5. Transaction History");
+        System.out.println("6. Exit");
+
+    }
+
+    private void printHeader(String title) {
+
+        System.out.println("\n==================================");
+        System.out.printf("%20s%n", title);
+        System.out.println("==================================");
+
+    }
+
     public void balanceEnquiry(Account account) {
         transactions.add("Balance Enquiry");
-        System.out.println("\n==================================");
-        System.out.println("      BALANCE ENQUIRY");
-        System.out.println("==================================");
+        printHeader("BALANCE ENQUIRY");
         System.out.println("Account Holder : " + account.getAccountHolderName());
         System.out.println("Account Number : " + account.getAccountNumber());
         System.out.println("Available Balance : ₹" + account.getBalance());
@@ -91,9 +102,7 @@ public class ATMService {
     }
 
     public void deposit(Account account) {
-        System.out.println("\n==================================");
-        System.out.println("           CASH DEPOSIT");
-        System.out.println("==================================");
+        printHeader("CASH DEPOSIT");
 
         System.out.print("Enter Deposit Amount: ₹");
         double amount = scanner.nextDouble();
@@ -112,9 +121,7 @@ public class ATMService {
     }
 
     public void withdraw(Account account) {
-        System.out.println("\n==================================");
-        System.out.println("        CASH WITHDRAWAL");
-        System.out.println("==================================");
+        printHeader("CASH WITHDRAW");
         System.out.print("Enter Withdrawal Amount: ₹");
         double amount = scanner.nextDouble();
         if (amount <= 0) {
@@ -138,9 +145,7 @@ public class ATMService {
     }
 
     public void changePin(Account account) {
-        System.out.println("\n==================================");
-        System.out.println("          CHANGE PIN");
-        System.out.println("==================================");
+        printHeader("CHANGE PIN");
         System.out.print("Enter Current PIN: ");
         int currentPin = scanner.nextInt();
 
@@ -168,9 +173,7 @@ public class ATMService {
 
     public void transactionHistory() {
 
-        System.out.println("\n==================================");
-        System.out.println("      TRANSACTION HISTORY");
-        System.out.println("==================================");
+        printHeader("TRANSACTION HISTORY");
 
         if (transactions.isEmpty()) {
             System.out.println("No transactions available.");
@@ -180,5 +183,12 @@ public class ATMService {
         for (String transaction : transactions) {
             System.out.println(transaction);
         }
+    }
+
+    private void exitMessage() {
+        System.out.println("\n==================================");
+        System.out.println("Thank you for using the ATM.");
+        System.out.println("Have a great day!");
+        System.out.println("==================================");
     }
 }
