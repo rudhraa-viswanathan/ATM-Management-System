@@ -20,7 +20,7 @@ public class ATMService {
 
             System.out.println("\nLogin Successful!");
             System.out.println("Welcome " + account.getAccountHolderName());
-            showMenu();
+            showMenu(account);
         } else {
 
             System.out.println("\nInvalid Account Number or PIN.");
@@ -28,7 +28,7 @@ public class ATMService {
         }
     }
 
-    public void showMenu() {
+    public void showMenu(Account account) {
         System.out.println("\n==================================");
         System.out.println("            ATM MENU");
         System.out.println("==================================");
@@ -41,6 +41,26 @@ public class ATMService {
         System.out.print("\nEnter your choice: ");
         int choice = scanner.nextInt();
 
-        System.out.println("You selected: " + choice);
+        switch (choice) {
+
+            case 1:
+                balanceEnquiry(account);
+                break;
+
+            default:
+                System.out.println("Feature coming soon...");
+
+        }
+    }
+
+    public void balanceEnquiry(Account account) {
+
+        System.out.println("\n==================================");
+        System.out.println("      BALANCE ENQUIRY");
+        System.out.println("==================================");
+        System.out.println("Account Holder : " + account.getAccountHolderName());
+        System.out.println("Account Number : " + account.getAccountNumber());
+        System.out.println("Available Balance : ₹" + account.getBalance());
+
     }
 }
