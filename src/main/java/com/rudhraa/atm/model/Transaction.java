@@ -28,6 +28,11 @@ public class Transaction {
 
     @Override
     public String toString() {
+
+        if (amount == 0) {
+            return type;
+        }
+
         return type + " : ₹" + amount;
     }
 }

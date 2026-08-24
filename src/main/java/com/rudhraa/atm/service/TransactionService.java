@@ -1,7 +1,7 @@
 package com.rudhraa.atm.service;
 
 import com.rudhraa.atm.model.Transaction;
-
+import com.rudhraa.atm.util.ConsolePrinter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,10 +22,7 @@ public class TransactionService {
     }
 
     public void showTransactionHistory() {
-
-        System.out.println("\n==================================");
-        System.out.println("      TRANSACTION HISTORY");
-        System.out.println("==================================");
+        ConsolePrinter.printHeader("TRANSACTION HISTORY");
 
         if (transactions.isEmpty()) {
             System.out.println("No transactions available.");

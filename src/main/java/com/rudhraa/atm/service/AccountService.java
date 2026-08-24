@@ -1,5 +1,5 @@
 package com.rudhraa.atm.service;
-
+import com.rudhraa.atm.util.ConsolePrinter;
 import com.rudhraa.atm.model.Account;
 import java.util.Scanner;
 
@@ -12,10 +12,7 @@ public class AccountService {
     }
 
     public void balanceEnquiry(Account account) {
-        System.out.println("\n==================================");
-        transactionService.addTransaction("Balance Enquiry");
-        System.out.println("==================================");
-        System.out.println("BALANCE ENQUIRY");
+        ConsolePrinter.printHeader("BALANCE ENQUIRY");
         System.out.println("Account Holder : " + account.getAccountHolderName());
         System.out.println("Account Number : " + account.getAccountNumber());
         System.out.println("Available Balance : ₹" + account.getBalance());
@@ -23,10 +20,7 @@ public class AccountService {
     }
 
     public void deposit(Account account) {
-        System.out.println("\n==================================");
-        System.out.println("CASH DEPOSIT");
-        System.out.println("==================================");
-
+        ConsolePrinter.printHeader("CASH DEPOSIT");
         System.out.print("Enter Deposit Amount: ₹");
         double amount = scanner.nextDouble();
 
@@ -38,15 +32,13 @@ public class AccountService {
         double currentBalance = account.getBalance();
         currentBalance += amount;
         account.setBalance(currentBalance);
-        transactionService.addTransaction("Deposited ₹" + amount);
+        transactionService.addTransaction("Deposited " + amount);
         System.out.println("\n₹" + amount + " deposited successfully!");
         System.out.println("Updated Balance : ₹" + account.getBalance());
     }
 
     public void withdraw(Account account) {
-        System.out.println("\n==================================");
-        System.out.println("CASH WITHDRAW");
-        System.out.println("==================================");
+        ConsolePrinter.printHeader("CASH WITHDRAWAL");
         System.out.print("Enter Withdrawal Amount: ₹");
         double amount = scanner.nextDouble();
         if (amount <= 0) {
@@ -63,16 +55,14 @@ public class AccountService {
         currentBalance -= amount;
 
         account.setBalance(currentBalance);
-        transactionService.addTransaction("Withdrawn ₹" + amount);
+        transactionService.addTransaction("Withdrawn " + amount);
         System.out.println("\n₹" + amount + " withdrawn successfully!");
         System.out.println("Remaining Balance : ₹" + account.getBalance());
 
     }
 
     public void changePin(Account account) {
-        System.out.println("\n==================================");
-        System.out.println("CHANGE PIN");
-        System.out.println("==================================");
+        ConsolePrinter.printHeader("CHANGE PIN");
         System.out.print("Enter Current PIN: ");
         int currentPin = scanner.nextInt();
 
